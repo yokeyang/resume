@@ -13,7 +13,9 @@ class App extends Component {
     this.state = {
       navpos:'relative',
       onWheel:'',
-      classNames:''
+      classNames:'',
+      visible:'hidden',
+      imgsrc:''
     }
   }
   componentDidMount(){
@@ -25,33 +27,26 @@ class App extends Component {
         this.setState({navpos:'relative'});
       }
       var classNames = this.state.classNames;
-      var anis = ['resume','skill_contain','exp_left0','exp_right','exp_left1'];
-      var ani = [];
-      for (var i in anis){
-        ani[i] = ReactDOM.findDOMNode(this.refs[anis[i]]).offsetTop - document.body.scrollTop;
-      }
-      if(ani[0] <= 20 && ReactDOM.findDOMNode(this.refs[anis[0]]).className == anis[0] + ' '){
-        this.setState({classNames:'lightSpeedIn animated'})
-      }
-      if(ani[1] <= 20 && ReactDOM.findDOMNode(this.refs[anis[0]]).className == anis[0] + ' '){
-        this.setState({classNames:'jello  animated'})
-      }
-      if(ani[2] <= 20 && ReactDOM.findDOMNode(this.refs[anis[0]]).className == anis[0] + ' '){
-        this.setState({classNames:'fadeInLeft animated'})
-      }
-      if(ani[3] <= 20 && ReactDOM.findDOMNode(this.refs[anis[0]]).className == anis[0] + ' '){
-        this.setState({classNames:'fadeInRight animated'})
-      }
-      if(ani[4] <= 20 && ReactDOM.findDOMNode(this.refs[anis[0]]).className == anis[0] + ' '){
-        this.setState({classNames:'fadeInLeft animated'})
-      }
     }
     window.addEventListener('scroll',onWheel);
+  }
+  showimg = (src) =>{
+    this.setState({visible:'visible'});
+    this.setState({imgsrc:src});
+  }
+  closeimg = () =>{
+    this.setState({visible:'hidden'})
   }
   render() {
     var style = {
       position:this.state.navpos
     }
+    var visimg = (
+      <div className = "visimg" style = {{visibility:this.state.visible}}>
+        <img src = {this.state.imgsrc}></img>
+        <a href = 'javascript:void(0);' className = "close" onClick = {()=>this.closeimg()}>X</a>
+      </div>
+    );
     return (
       <div className="App">
         <div className = "head">
@@ -63,49 +58,50 @@ class App extends Component {
         </div>
         <div className = "navouter" ref = 'navbar'>
           <div className = "navbar" style = {style}>
-          <a href = "#" className = "nav">YokeYang</a>
-          <div className = "nav">
-            <Link to="resume" activeClass="active" spy={true} smooth={true} offset={-20} duration={1000}>
-              <a href = "#" className = "navright_a">个人简介</a>
-            </Link>
-            <Link to="skill" activeClass="active" spy={true} smooth={true} offset={-20} duration={1000}>
-              <a href = "#" className = "navright_a">基本技能</a>
-            </Link>
-            <Link to="experiences" activeClass="active" spy={true} smooth={true} offset={-20} duration={1000}>
-              <a href = "#" className = "navright_a">项目经验</a>
-            </Link>
-            <Link to="expect" activeClass="active" spy={true} smooth={true} offset={-20} duration={1000}>
-              <a href = "#" className = "navright_a">未来展望</a>
-            </Link>
+            <a href = "#" className = "nav">YokeYang</a>
+            <div className = "nav">
+              <Link to="resume" activeClass="active" spy={true} smooth={true} offset={-20} duration={1000}>
+                <a href = "#" className = "navright_a">个人简介</a>
+              </Link>
+              <Link to="skill" activeClass="active" spy={true} smooth={true} offset={-20} duration={1000}>
+                <a href = "#" className = "navright_a">基本技能</a>
+              </Link>
+              <Link to="experiences" activeClass="active" spy={true} smooth={true} offset={-20} duration={1000}>
+                <a href = "#" className = "navright_a">项目经验</a>
+              </Link>
+              <Link to="expect" activeClass="active" spy={true} smooth={true} offset={-20} duration={1000}>
+                <a href = "#" className = "navright_a">未来展望</a>
+              </Link>
+            </div>
           </div>
         </div>
-        </div>
+        {visimg}
         <div className = "intro_contain">
           <div className = {"resume "+this.state.classNames} id = "resume" ref = 'resume'>
             <h1 className = "title">个人简介</h1>
             <div className = "links">
               <div className = "link">
-                <a href = "#">
+                <a href = "https://github.com/yokeyang" target="_blank">
                   <img src = {require('../public/img/github.png')}></img>
                   <h4>Github</h4>
                 </a>
               </div>
               <div className = "link">
-                <a href = "#">
+                <a href = "mail:ylcj1314@gmail.com" target="_blank">
                   <img src = {require('../public/img/gmail.png')}></img>
                   <h4>Gmail</h4>
                 </a>
               </div>
               <div className = "link">
-                <a href = "#">
+                <a href = "tel:13098878963">
                   <img src = {require('../public/img/tel.png')}></img>
                   <h4>86 130-9887-8963</h4>
                 </a>
               </div>
               <div className = "link">
-                <a href = "#">
+                <a href = "javascript:void(0);" onClick = {()=>{this.showimg(require("../public/img/wx.jpg"))}}>
                   <img src = {require('../public/img/wechat.png')}></img>
-                  <h4>Wechat</h4>
+                  <h4>yyk218906</h4>
                 </a>
               </div>
             </div>
@@ -119,12 +115,13 @@ class App extends Component {
                 <p><span>github</span> | <a href = "#">yokeyang</a></p>
               </div>
               <div className = "oriright">
-                <p>自2015年进入大学开始，学习前端相关知识，在学校大神<strong>itjesses（github）</strong>的指导下，见证了自己作为一个前端小白
-                  到前端爱好者的发展历程；喜欢前端，正如一句话说的那样，前端是设计与技术的结合
-                </p>
-                <p>两年的时间，自己学习了前端的基础知识，了解并掌握了HTML、CSS、JS、JQUERY等前端基础知识，并且对于一些主流的前端框架以及前端工具
-                  服务器端语言都有所涉及和了解
-                </p>
+                <h2>项目展示:</h2>
+                <a href = "javascript:void(0);">
+                  <img onClick = {()=>{this.showimg(require("../public/img/01.png"))}} src = {require('../public/img/01.png')}></img>
+                </a>
+                <a href = "javascript:void(0);">
+                  <img onClick = {()=>{this.showimg(require("../public/img/02.png"))}} src = {require('../public/img/02.png')}></img>
+                </a>
               </div>
             </div>
           </div>

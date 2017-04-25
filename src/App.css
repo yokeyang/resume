@@ -16,6 +16,26 @@ a{
   text-decoration: none;
   color: inherit;
 }
+.visimg{
+  width: 100vw;
+  height: auto;
+  position: fixed;
+  top:25%;
+  text-align: center;
+  margin: 0 auto;
+  z-index: 1;
+}
+.visimg img{
+  margin: 0 auto;
+  height: 30vw;
+  width: auto;
+  margin-right: 10px;
+}
+.close{
+  position: absolute;
+  top: -13px;
+  font-size: 20px;
+}
 .title{
   color: white;
   text-shadow: #FFFFFF 1px 0px 4px;
@@ -98,8 +118,11 @@ a{
   width: 550px;
   text-align: justify;
 }
-.oriright{
-  line-height: 2em;
+.oriright img{
+  width: 260px;
+  height: auto;
+  margin-left: 10px;
+  float: left;
 }
 
 .skill{
@@ -130,7 +153,7 @@ a{
   width: auto;
   text-align: center;
   background-color: #6633CC;
-  height: 100vh;
+  height: auto;
   overflow: hidden;
   box-shadow: 0px 0px 30px #333;
   padding: 0 100px 0 100px;
@@ -144,6 +167,7 @@ a{
   margin: 0;
 }
 .exp_left,.exp_right{
+  clear: both;
   overflow: hidden;
   padding: 20px 20px 0px 20px;
 }
@@ -152,25 +176,29 @@ a{
   float: left;
   text-align: left;
 }
-.exp_left:last-child{
-  position: relative;
-  top: -10vh;
-}
 .exp_right{
   float: right;
   text-align: right;
   height: auto;
-  position: relative;
-  top: -5vh;
+}
+.experiences{
+  width: auto;
+  text-align: center;
+  background-color: #6633CC;
+  height: auto;
+  overflow: hidden;
+  box-shadow: 0px 0px 30px #333;
+  padding: 0 100px 0 100px;
 }
 .expectation{
+  width: auto;
+  overflow: hidden;
   width: auto;
   height: 100vh;
   background-color: #33CC33;
   text-align: center;
   color: white;
   box-shadow: 0px 0px 30px #333;
-  margin-top: -25.5px;
 }
 .expect_contain{
   padding-top: 20vh;
